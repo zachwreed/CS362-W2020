@@ -47,9 +47,7 @@ def GetSupplyOrder(nV):
                 6:['Gold','Adventurer'],8:['Province']}
     return supply_order
 
-def GetSupply(nV):
-    player_names = GetPlayerNames(None)
-    box = GetBoxes(None) 
+def GetSupply(box, player_names):
     #number of curses and victory cards
     if len(player_names)>2:
         nV=12
@@ -61,7 +59,6 @@ def GetSupply(nV):
     random.shuffle(boxlist)
     random10 = boxlist[:10]
     supply = defaultdict(list,[(k,box[k]) for k in random10])
-
 
     #The supply always has these cards
     supply["Copper"]=[Dominion.Copper()]*(60-len(player_names)*7)
@@ -76,6 +73,20 @@ def GetSupply(nV):
 
 def GetPlayerNames(nV):
     return ["Annie","*Ben","*Carla"]
+
+def InitPlayers(nV, player_names):
+    players = []
+    for name in player_names:
+        if name[0]=="*":
+            players.append(Dominion.ComputerPlayer(name[1:]))
+        elif name[0]=="^":
+            players.append(Dominion.TablePlayer(name[1:]))
+        else:
+            players.append(Dominion.Player(name))
+    return players
+
+def InitTurn(nV):
+    return 0
 
 def InitTrash(nV):
     return []
