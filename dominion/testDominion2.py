@@ -11,13 +11,19 @@ from collections import defaultdict
 import testUtility
 
 # Get intialized values
-player_names = testUtility.GetPlayerNames(None)
-players = testUtility.InitPlayers(None, player_names)
-box = testUtility.GetBoxes(None)
-supply = testUtility.GetSupply(box, player_names)
-supply_order = testUtility.GetSupplyOrder(None)
-turn = testUtility.InitTurn(None)
-trash = testUtility.InitTrash(None)
+player_names = testUtility.GetPlayerNames()
+nC = testUtility.GetnC(player_names)
+nV = testUtility.GetnV(player_names)
+players = testUtility.InitPlayers(player_names)
+
+box = testUtility.GetBoxes(nV)
+supply = testUtility.GetSupply(box, player_names, nC, nV)
+supply_order = testUtility.GetSupplyOrder()
+turn = testUtility.InitTurn()
+trash = testUtility.InitTrash()
+
+supply["Estate"]=[Dominion.Duchy()]*nV
+
 
 #Play the game
 while not Dominion.gameover(supply):
