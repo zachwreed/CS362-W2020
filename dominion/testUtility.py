@@ -39,7 +39,7 @@ def GetBoxes(nV):
     box["Throne Room"]=[Dominion.Throne_Room()]*10
     return box
 
-def GetSupplyOrder():
+def GetSupplyOrder(nV):
     supply_order = {0:['Curse','Copper'],2:['Estate','Cellar','Chapel','Moat'],
                 3:['Silver','Chancellor','Village','Woodcutter','Workshop'],
                 4:['Gardens','Bureaucrat','Feast','Militia','Moneylender','Remodel','Smithy','Spy','Thief','Throne Room'],
@@ -47,20 +47,13 @@ def GetSupplyOrder():
                 6:['Gold','Adventurer'],8:['Province']}
     return supply_order
 
-
-def GetnV(player_names):
+def GetSupply(box, player_names):
     #number of curses and victory cards
     if len(player_names)>2:
         nV=12
     else:
         nV=8
-    return nV
-
-def GetnC(player_names):
     nC = -10 + 10 * len(player_names)
-    return nC
-
-def GetSupply(box, player_names, nC, nV):
     #Pick 10 cards from box to be in the supply.
     boxlist = [k for k in box]
     random.shuffle(boxlist)
@@ -78,10 +71,10 @@ def GetSupply(box, player_names, nC, nV):
 
     return supply
 
-def GetPlayerNames():
+def GetPlayerNames(nV):
     return ["Annie","*Ben","*Carla"]
 
-def InitPlayers(player_names):
+def InitPlayers(nV, player_names):
     players = []
     for name in player_names:
         if name[0]=="*":
@@ -92,8 +85,8 @@ def InitPlayers(player_names):
             players.append(Dominion.Player(name))
     return players
 
-def InitTurn():
+def InitTurn(nV):
     return 0
 
-def InitTrash():
+def InitTrash(nV):
     return []
